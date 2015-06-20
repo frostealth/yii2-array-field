@@ -1,0 +1,27 @@
+{
+    "name": "frostealth/yii2-array-field",
+    "description": "Yii2 Array Field Behavior",
+    "license": "MIT",
+    "homepage": "https://github.com/frostealth/yii2-array-field",
+    "type": "yii2-extension",
+    "authors": [
+        {
+            "name": "Ivan Kudinov",
+            "email": "frostealth@gmail.com",
+            "homepage": "http://frostealth.ru"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/frostealth/yii2-array-field/issues?state=open"
+    },
+    "autoload": {
+        "psr-4": {
+            "frostealth\\yii2\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "~2.0"
+    }
+}
