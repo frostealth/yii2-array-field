@@ -1,6 +1,7 @@
 {
     "name": "frostealth/yii2-array-field",
     "description": "Yii2 Array Field Behavior",
+    "keywords": ["yii2", "array", "attribute", "json", "behavior"],
     "license": "MIT",
     "homepage": "https://github.com/frostealth/yii2-array-field",
     "type": "yii2-extension",
