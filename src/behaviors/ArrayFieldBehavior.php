@@ -3,8 +3,7 @@
 namespace frostealth\yii2\behaviors;
 
 use yii\base\Behavior;
-use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
+use yii\db\BaseActiveRecord;
 use yii\helpers\Json;
 
 /**
@@ -26,7 +25,7 @@ use yii\helpers\Json;
  * }
  * ~~~
  *
- * @property ActiveRecord $owner
+ * @property BaseActiveRecord $owner
  *
  * @package frostealth\yii2\behaviors
  */
@@ -63,11 +62,11 @@ class ArrayFieldBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_FIND => 'decode',
-            ActiveRecord::EVENT_AFTER_INSERT => 'decode',
-            ActiveRecord::EVENT_AFTER_UPDATE => 'decode',
-            ActiveRecord::EVENT_BEFORE_UPDATE => 'encode',
-            ActiveRecord::EVENT_BEFORE_INSERT => 'encode',
+            BaseActiveRecord::EVENT_AFTER_FIND => 'decode',
+            BaseActiveRecord::EVENT_AFTER_INSERT => 'decode',
+            BaseActiveRecord::EVENT_AFTER_UPDATE => 'decode',
+            BaseActiveRecord::EVENT_BEFORE_UPDATE => 'encode',
+            BaseActiveRecord::EVENT_BEFORE_INSERT => 'encode',
         ];
     }
 
@@ -77,9 +76,8 @@ class ArrayFieldBehavior extends Behavior
     public function encode()
     {
         foreach ($this->attributes as $attribute) {
-            if (!$this->owner->getIsNewRecord()) {
-                $oldValue = ArrayHelper::getValue($this->_oldAttributes, $this->defaultEncodedValue);
-                $this->owner->setOldAttribute($attribute, $oldValue);
+            if (isset($this->_oldAttributes[$attribute])) {
+                $this->owner->setOldAttribute($attribute, $this->_oldAttributes[$attribute]);
             }
 
             $value = $this->owner->getAttribute($attribute);
@@ -96,7 +94,7 @@ class ArrayFieldBehavior extends Behavior
     public function decode()
     {
         foreach ($this->attributes as $attribute) {
-            if (!empty($this->_cache[$attribute])) {
+            if (isset($this->_cache[$attribute])) {
                 $value = $this->_cache[$attribute];
             } else {
                 $value = Json::decode($this->owner->getAttribute($attribute));
