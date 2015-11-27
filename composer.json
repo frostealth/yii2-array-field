@@ -8,7 +8,7 @@
     "authors": [
         {
             "name": "Ivan Kudinov",
-            "email": "frostealth@gmail.com",
+            "email": "i.kudinov@frostealth.ru",
             "homepage": "http://frostealth.ru"
         }
     ],
@@ -20,7 +20,6 @@
             "frostealth\\yii2\\": "src/"
         }
     },
-    "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0"
